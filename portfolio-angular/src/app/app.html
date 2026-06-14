@@ -1,42 +1,28 @@
-<body>
-<h1>{{ title() }}</h1>
-<p>Bem-vindo ao meu portfólio - em construção com Angular!</p>
-<section class="sobre">
-  <h2>Sobre mim 👨‍💻</h2>
-<p>Meu nome é Gustavo, estudante do Instituto Federal do Paraná - Curso técnico em Informática. Neste portfólio, pretendo mostrar um pouco sobre mim, meus projetos e trabalhos. </p>
-</section>
+<mat-sidenav-container class="container">
 
-<section class="projetos"> 
-  <h2>Projetos 🚀</h2>
-  <div class="card">
-     <h3>Sistema de Login PHP</h3>
-    <p>Projeto com autenticação e auditoria.</p>
-   </div>
+  <mat-sidenav #menu mode="over">
+    <h3>Meu Portfólio</h3>
 
-   <div class="card">
-     <h3>Formulário de Contato</h3>
-    <p>Sistema de contato com os campos Nome, E-mail e Mensagem.</p>
-   </div>
+    <a mat-button routerLink="/" (click)="menu.close()">Início</a>
+    <a mat-button routerLink="/sobre" (click)="menu.close()">Sobre</a>
+    <a mat-button routerLink="/projetos" (click)="menu.close()">Projetos</a>
+    <a mat-button routerLink="/contato" (click)="menu.close()">Contato</a>
+  </mat-sidenav>
 
-   <div class="card">
-     <h3>Catálogo</h3>
-    <p>Catálogo de Tecnologias usadas nos projetos.</p>
-   </div>
+  <mat-sidenav-content>
 
-  <div class="card"> 
-  <h3>Portfólio Angular</h3>
-  <p>Site pessoal desenvolvido com Angular.</p>
- </div>
-</section>
+    <mat-toolbar color="primary">
+      <button mat-icon-button (click)="menu.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
 
-<section class="contato">
-  <h2>Contato 📪</h2>
-  <p><strong>Email:</strong> 20241ctb0100025@estudantes.ifpr.edu.br</p>
-  <p>
-    <strong>GitHub:</strong>
-    <a href="https://github.com/gustavohanisch" target="_blank">
-      github.com/gustavohanisch
-    </a>
-  </p>
-</section>
-</body>
+      <span>Meu Portfólio</span>
+    </mat-toolbar>
+
+    <main class="conteudo">
+      <router-outlet></router-outlet>
+    </main>
+
+  </mat-sidenav-content>
+
+</mat-sidenav-container>

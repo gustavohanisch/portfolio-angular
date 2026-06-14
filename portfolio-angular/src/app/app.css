@@ -6,12 +6,57 @@ body {
   color: white;
 }
 
+.container {
+  height: 100vh;
+}
+
+mat-toolbar {
+  background-color: #1e293b !important;
+  color: white !important;
+}
+
+mat-sidenav {
+  width: 250px;
+  background-color: #1e293b;
+  color: white;
+  padding-top: 10px;
+}
+
+mat-sidenav a {
+  display: block;
+  color: white;
+  text-decoration: none;
+  margin: 5px 10px;
+}
+
+mat-sidenav a:hover {
+  color: gold;
+}
+
+.conteudo {
+  padding: 20px;
+}
+
 .card {
- background-color: #1e293b;
- padding: 20px;
- border-radius: 10px;
- margin-bottom: 15px;
- transition: 0.3s; }
+  background-color: #1e293b;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  transition: 0.3s;
+}
 
 .card:hover {
-     transform: scale(1.03); }
+  transform: scale(1.03);
+}
+
+.espacador {
+  flex: 1 1 auto;
+}
+
+.ativo {
+  background-color: gold;
+  color: black !important;
+  font-weight: bold;
+  border-radius: 5px;
+}
+

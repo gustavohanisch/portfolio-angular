@@ -15,11 +15,17 @@ Node.js
 npm
 📂 Estrutura do Projeto
 portfolio-angular/
+├──.angular/
+├──.vscode/
+├──node_modules/
 ├── src/
 ├── public/
 ├── angular.json
 ├── package.json
+├── package-lock.json
+├── tsconfig.app.json
 ├── tsconfig.json
+├── tsconfig.spec.json
 └── README.md
 ⚙️ Ambiente Reproduzível
 
@@ -58,9 +64,12 @@ O projeto foi desenvolvido com foco em responsividade, permitindo boa experiênc
 Desktop
 Tablets
 Smartphones
-👨‍💻 Autor
 
+👨‍💻 Autor
 Gustavo Hanisch
 
 GitHub:
 https://github.com/gustavohanisch
+
+Atividade Aula 16:
+Nesta etapa do projeto foi implementado o sistema de navegação utilizando o Angular Router, transformando a aplicação em uma Single Page Application (SPA). Foram criados os componentes Início, Sobre, Projetos e Contato, cada um representando uma seção do portfólio. Também foi adicionada uma barra de navegação responsiva com Angular Material, permitindo a troca entre as páginas sem recarregar o navegador. Além disso, a página inicial recebeu um cartão de apresentação utilizando o componente MatCard, proporcionando uma interface mais moderna e organizada. Essa atividade consolidou conceitos fundamentais do Angular, como componentes standalone, roteamento, navegação com routerLink e integração com a biblioteca Angular Material.
