@@ -60,3 +60,11 @@ mat-sidenav a:hover {
   border-radius: 5px;
 }
 
+mat-sidenav a.ativo {
+  background-color: #fbbf24;
+  color: #020617 !important;
+  font-weight: bold;
+  border-left: 4px solid white;
+  border-radius: 5px;
+}
+
