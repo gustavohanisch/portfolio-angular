@@ -1,0 +1,36 @@
+.contato-card {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 25px;
+  border-radius: 20px;
+  background: #fff5f9;
+  box-shadow: 0 8px 20px rgba(214, 51, 132, 0.15);
+}
+
+mat-card-header {
+  margin-bottom: 20px;
+}
+
+mat-card-title {
+  color: #1e293b;
+  font-size: 1.8rem;
+}
+
+mat-card-subtitle {
+  color: #666;
+}
+
+.formulario {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.botao-enviar {
+  align-self: flex-end;
+  margin-top: 10px;
+}

@@ -1,1 +1,45 @@
-<p>contato works!</p>
+<mat-card class="contato-card">
+
+  <mat-card-header>
+    <mat-card-title>Fale Comigo 💬</mat-card-title>
+    <mat-card-subtitle>
+      Preencha o formulário abaixo para entrar em contato.
+    </mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+
+    <form class="formulario">
+
+      <mat-form-field appearance="fill">
+        <mat-label>Nome</mat-label>
+        <mat-icon matPrefix>person</mat-icon>
+        <input matInput placeholder="Seu nome completo">
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>E-mail</mat-label>
+        <mat-icon matPrefix>email</mat-icon>
+        <input matInput type="email" placeholder="seuemail@email.com">
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Mensagem</mat-label>
+        <mat-icon matPrefix>chat</mat-icon>
+        <textarea
+          matInput
+          rows="6"
+          placeholder="Digite sua mensagem">
+        </textarea>
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" class="botao-enviar">
+        <mat-icon>send</mat-icon>
+        Enviar Mensagem
+      </button>
+
+    </form>
+
+  </mat-card-content>
+
+</mat-card>
