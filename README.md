@@ -87,6 +87,6 @@ sudo service mariadb start
 ## Criar BD:
 sudo mariadb < sql/setup.sql
 
-## Executar API
+## Executar API:
 
 /usr/bin/php -S 0.0.0.0:8000 (raiz do projeto)
