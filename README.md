@@ -73,3 +73,20 @@ https://github.com/gustavohanisch
 
 Atividade Aula 16:
 Nesta etapa do projeto foi implementado o sistema de navegação utilizando o Angular Router, transformando a aplicação em uma Single Page Application (SPA). Foram criados os componentes Início, Sobre, Projetos e Contato, cada um representando uma seção do portfólio. Também foi adicionada uma barra de navegação responsiva com Angular Material, permitindo a troca entre as páginas sem recarregar o navegador. Além disso, a página inicial recebeu um cartão de apresentação utilizando o componente MatCard, proporcionando uma interface mais moderna e organizada. Essa atividade consolidou conceitos fundamentais do Angular, como componentes standalone, roteamento, navegação com routerLink e integração com a biblioteca Angular Material.
+
+Aula 17: Como rodar a API:
+
+## Instalar o MariaDB, PHP CLI e driver PDO MySQL:
+
+sudo apt-get update sudo apt-get install -y mariadb-server php-cli php-mysql
+
+## Iniciar banco de dados:
+
+sudo service mariadb start
+
+## Criar BD:
+sudo mariadb < sql/setup.sql
+
+## Executar API
+
+/usr/bin/php -S 0.0.0.0:8000 (raiz do projeto)
