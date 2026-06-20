@@ -84,6 +84,9 @@ sudo apt-get update sudo apt-get install -y mariadb-server php-cli php-mysql
 
 sudo service mariadb start
 
+## Entrar no MariaDB como administrador:
+sudo mariadb
+
 ## Criar BD:
 sudo mariadb < sql/setup.sql
 
