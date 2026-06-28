@@ -93,3 +93,16 @@ sudo mariadb < sql/setup.sql
 ## Executar API:
 
 /usr/bin/php -S 0.0.0.0:8000 (raiz do projeto)
+
+## 🎯 Autoavaliação
+Conceito pretendido: [ A ]
+
+Justificativa:
+- Consumo da API (Projetos): projeto.service.ts (GET) + projetos.ts (subscribe)
+- Catalogo + botao GitHub: tecnologia.service.ts + projetos.html (mat-card-actions)
+- Boas praticas: a URL/HTTP fica no service; o componente so exibe
+- A tela Catálogo também consumindo a API (tecnologias) -> catalogo.ts - linhas 17 a 25 e catalogo.html = linhas 9 a 17.
+- O botão "Ver no GitHub" no card de projeto (property binding [href]) -> projetos.html - linhas 33 à 43.
+- Tratamento de erro nas duas telas e a URL centralizada no service -> projetos.html, projetos.ts, catalogo.html e catalogo.ts.
+- Usar o async pipe (| async) no lugar do subscribe em uma das telas -> projetos.ts e projetos.html
+- Autoavaliacao: esta secao do README
