@@ -4,7 +4,7 @@
 $host    = 'localhost';
 $db      = 'dwii_db';
 $user    = 'dwii_user';
-$pass    = 'dwi12026';
+$pass    = 'dwii2026';
 $charset = 'utf8mb4';
 
 // host 'localhost' conecta pelo socket local (casa com o usuario @'localhost')
