@@ -106,3 +106,12 @@ Justificativa:
 - Tratamento de erro nas duas telas e a URL centralizada no service -> projetos.html, projetos.ts, catalogo.html e catalogo.ts.
 - Usar o async pipe (| async) no lugar do subscribe em uma das telas -> projetos.ts e projetos.html
 - Autoavaliacao: esta secao do README
+
+## 🎯 Autoavaliação
+Conceito pretendido: [ A / B / C / D ]
+Justificativa (cite o arquivo/linha de cada criterio):
+- Form reativo + erro por campo: contato.html (mensagens com touched) + contato.ts (Validators)
+- POST via service + tratamento: contato.service.ts (http.post) + contato.ts (subscribe next/error)
+- Endpoint PHP (php://input, validacao, prepared, 201/400): api/contato.php
+- Estados/robustez/UX (DUA): contato.html (labels for/id, sem cor unica) + contato.ts (estado enviando)
+- Autoavaliacao: esta secao do README
