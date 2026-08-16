@@ -12,3 +12,4 @@ export const routes: Routes = [
   { path: 'contato', component: Contato },
   { path: 'catalogo', component: Catalogo },
 ];
+
