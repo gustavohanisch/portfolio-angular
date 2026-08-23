@@ -6,6 +6,10 @@
   <p>{{ erro }}</p>
 }
 
+@if (!carregando && tecnologias.length === 0 && !erro) {
+  <p>Nenhuma tecnologia cadastrada ainda.</p>
+}
+
 @for (t of tecnologias; track t.id) {
   <mat-card style="margin-bottom: 12px;">
     <mat-card-header>
