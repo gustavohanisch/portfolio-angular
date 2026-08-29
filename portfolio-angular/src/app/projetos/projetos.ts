@@ -2,6 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { ProjetoService, Projeto } from './projeto.service';
 import { MatButtonModule } from '@angular/material/button';
+import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-projetos',
@@ -10,6 +11,7 @@ import { MatButtonModule } from '@angular/material/button';
 })
 export class Projetos implements OnInit {
   private service = inject(ProjetoService);
+  private cdr = inject(ChangeDetectorRef);
   projetos: Projeto[] = [];
   carregando = true;
   erro = '';
@@ -19,10 +21,12 @@ export class Projetos implements OnInit {
       next: (lista) => {
         this.projetos = lista;
         this.carregando = false;
+        this.cdr.detectChanges();
       },
       error: () => {
         this.erro = 'Falha ao carregar os projetos.';
         this.carregando = false;
+        this.cdr.detectChanges();
       }
     });
   }

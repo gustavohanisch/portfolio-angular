@@ -37,7 +37,7 @@ if (!empty($erros)) {
 }
 
 // 4) Gravar com PREPARED STATEMENT (anti SQL Injection)
-require __DIR__ . '/conexao.php';     // fornece $pdo (Aula 16)
+require __DIR__ . '/../conexao.php';     // fornece $pdo (Aula 16)
 $sql = 'INSERT INTO contatos (nome, email, mensagem)
         VALUES (:nome, :email, :mensagem)';
 $stmt = $pdo->prepare($sql);
