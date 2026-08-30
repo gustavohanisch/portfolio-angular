@@ -65,7 +65,7 @@ salvar() {
     : this.service.criar(dados);
 
     requisicao.subscribe({
-      next: () => { this.salvando = false; this.cdr.detectChanges(); },
+      next: () => {   this.salvando = false; this.editandoId = null; this.form.reset({ nome: '', descricao: '', tecnologias: '', link_github: '', ano: 2026 }); this.carregar(); },
       error: () => { this.salvando = false; this.erro = 'Nao foi possivel salvar.'; this.cdr.detectChanges(); }
     });
   }

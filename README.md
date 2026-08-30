@@ -230,3 +230,9 @@ Dessa forma, a aplicação diferencia três situações importantes: **carregame
 **Conceito pretendido: ⭐⭐⭐ Nível A — Excelente.**
 
 Considero que meu projeto atende aos requisitos do Nível A porque, além de consumir as APIs por meio de services, possuir tratamento de erros, property binding para os links do GitHub e URLs centralizadas, também implementei por iniciativa própria o tratamento do **estado vazio nas telas de Projetos e Catálogo**.
+
+
+## Por que o mesmo endereço api/projetos.php consegue fazer quatro coisas diferentes?
+
+O mesmo endereço da API consegue fazer operações diferentes porque cada requisição informa qual método HTTP deve ser executado.
+Assim, usando GET, POST, PUT ou DELETE, o servidor sabe se deve consultar, criar, alterar ou excluir um projeto.
