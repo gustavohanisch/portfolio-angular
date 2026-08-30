@@ -236,3 +236,16 @@ Considero que meu projeto atende aos requisitos do Nível A porque, além de con
 
 O mesmo endereço da API consegue fazer operações diferentes porque cada requisição informa qual método HTTP deve ser executado.
 Assim, usando GET, POST, PUT ou DELETE, o servidor sabe se deve consultar, criar, alterar ou excluir um projeto.
+
+## 🎯 Autoavaliacao
+
+Conceito pretendido: A
+
+- R1 (API decide pelo verbo): api/projetos.php linhas 28-95
+- R1 (erros 400/404/405 testados): README.md secao "Testes com curl"
+- R2 (tela pelo service, sem http. no componente): portfolio-angular/src/app/gestao/gestao.ts linhas 1-40
+- R2 (campo status no formulario): portfolio-angular/src/app/gestao/gestao.html linhas 22-30
+- R3 (lista atualiza sem F5): portfolio-angular/src/app/gestao/gestao.ts linhas 58-66
+- R4 (justificativa das 2 linhas): README.md secao "Um endereco, quatro acoes"
+- R4 (intercalacao Network): README.md secao "O que a aba Network mostrou"
+- R5 (instrucoes de execucao): README.md secao "Como rodar"
