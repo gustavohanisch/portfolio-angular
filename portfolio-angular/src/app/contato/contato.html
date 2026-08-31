@@ -3,15 +3,24 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
   <label for="nome">Nome</label>
   <input id="nome" type="text" formControlName="nome">
+  @if (form.get('nome')?.invalid && form.get('nome')?.touched) {
+  <p>Informe um nome (mín. 3 letras)</p>
+}
 
   <label for="email">E-mail</label>
   <input id="email" type="email" formControlName="email">
+  @if (form.get('email')?.invalid && form.get('email')?.touched) {
+  <p>E-mail inválido</p>
+}
 
   <label for="mensagem">Mensagem</label>
   <textarea id="mensagem" formControlName="mensagem" rows="4"></textarea>
+  @if (form.get('mensagem')?.invalid && form.get('mensagem')?.touched) {
+  <p>Mensagem muito curta (mín. 10)</p>
+}
 
   <!-- botao desabilita enquanto envia; troca o texto -->
-  <button type="submit" [disabled]="enviando">
+<button type="submit" [disabled]="enviando || form.invalid">
     {{ enviando ? 'Enviando...' : 'Enviar' }}
   </button>
 </form>

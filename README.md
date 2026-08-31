@@ -237,15 +237,51 @@ Considero que meu projeto atende aos requisitos do Nível A porque, além de con
 O mesmo endereço da API consegue fazer operações diferentes porque cada requisição informa qual método HTTP deve ser executado.
 Assim, usando GET, POST, PUT ou DELETE, o servidor sabe se deve consultar, criar, alterar ou excluir um projeto.
 
-## 🎯 Autoavaliacao
+## 🎯 Autoavaliação — Nível A (Excelente)
 
-Conceito pretendido: A
+**Conceito pretendido: Nível A — Excelente**
 
-- R1 (API decide pelo verbo): api/projetos.php linhas 28-95
-- R1 (erros 400/404/405 testados): README.md secao "Testes com curl"
-- R2 (tela pelo service, sem http. no componente): portfolio-angular/src/app/gestao/gestao.ts linhas 1-40
-- R2 (campo status no formulario): portfolio-angular/src/app/gestao/gestao.html linhas 22-30
-- R3 (lista atualiza sem F5): portfolio-angular/src/app/gestao/gestao.ts linhas 58-66
-- R4 (justificativa das 2 linhas): README.md secao "Um endereco, quatro acoes"
-- R4 (intercalacao Network): README.md secao "O que a aba Network mostrou"
-- R5 (instrucoes de execucao): README.md secao "Como rodar"
+Escolhi o Nível A porque implementei, além das validações e dos estados de envio, recursos para melhorar o tratamento de erros e a experiência do usuário.
+
+### Validação do formulário
+
+No arquivo `src/app/contato/contato.ts`, utilizei Reactive Forms com validações para os três campos do formulário.
+
+* O campo **nome** é obrigatório e precisa ter pelo menos 3 caracteres.
+* O campo **e-mail** é obrigatório e precisa possuir um formato válido.
+* O campo **mensagem** é obrigatório e deve possuir pelo menos 10 caracteres.
+
+No arquivo `src/app/contato/contato.html`, as mensagens de validação são mostradas somente quando o campo está inválido e já foi acessado pelo usuário.
+
+### Estados durante o envio
+
+O arquivo `src/app/contato/contato.ts` controla o estado da requisição por meio da variável `enviando`.
+
+Enquanto a mensagem está sendo enviada, o botão fica bloqueado e seu texto muda para **"Enviando..."**. Quando a operação termina, o botão volta ao estado normal.
+
+Quando o envio é realizado com sucesso, uma mensagem é apresentada ao usuário e o formulário é limpo utilizando `form.reset()`.
+
+### Tratamento dos erros da API
+
+Também implementei o tratamento das respostas de erro do back-end.
+
+O callback `error` do `subscribe`, localizado em `src/app/contato/contato.ts`, recebe um `HttpErrorResponse` e verifica se a API retornou uma lista de erros em `err.error?.erros`.
+
+Dessa maneira, as informações fornecidas pelo back-end são aproveitadas para informar o usuário sobre o problema. Caso a API não forneça esses detalhes, é apresentada uma mensagem alternativa informando que não foi possível realizar o envio.
+
+### Acessibilidade e experiência do usuário
+
+No arquivo `src/app/contato/contato.html`, os campos possuem `<label>` associados aos respectivos elementos por meio de `for` e `id`.
+
+Também foram adicionadas mensagens de erro em texto, evitando que a identificação de um problema dependa somente da cor.
+
+Quando o formulário é enviado com dados inválidos, os campos são marcados como tocados e o foco é direcionado para o primeiro campo que precisa ser corrigido, facilitando a navegação pelo formulário.
+
+### Organização dos arquivos
+
+A lógica do formulário e da comunicação com a API permanece no arquivo TypeScript, enquanto a estrutura visual fica no HTML e a aparência no arquivo CSS. Essa separação facilita a manutenção e deixa cada arquivo responsável por uma parte específica da aplicação.
+
+### Conclusão
+
+Considero que o projeto atende ao **Nível A — Excelente**, pois o formulário possui validações, controle completo dos estados de envio, tratamento das mensagens retornadas pelo back-end e melhorias de acessibilidade e usabilidade. Além disso, as principais decisões da implementação estão documentadas nesta autoavaliação.
+

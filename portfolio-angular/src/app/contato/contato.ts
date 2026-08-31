@@ -3,12 +3,14 @@ import { Component, inject } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { ContatoService } from '../contato.service';
 import { ChangeDetectorRef } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-contato',
   standalone: true,
-  imports: [ReactiveFormsModule],    // libera formGroup/formControlName no HTML
+  imports: [ReactiveFormsModule],
   templateUrl: './contato.html',
+  styleUrl: './contato.css',
 })
 export class Contato {
   private fb = inject(FormBuilder);
@@ -24,10 +26,17 @@ export class Contato {
 
   onSubmit() {
     this.sucesso = ''; this.erro = '';
-    if (this.form.invalid) {          // trava: nem chama a API se inválido
-      this.form.markAllAsTouched();   // força exibir os erros de campo
-      return;
-    }
+    if (this.form.invalid) {
+  this.form.markAllAsTouched();
+
+  const primeiroCampoInvalido = document.querySelector(
+    'input.ng-invalid, textarea.ng-invalid'
+  ) as HTMLElement | null;
+
+  primeiroCampoInvalido?.focus();
+
+  return;
+}
 
     this.enviando = true; // desabilita o botão enquanto envia
     this.service.enviar(this.form.getRawValue()).subscribe({
@@ -37,11 +46,16 @@ export class Contato {
       this.enviando = false;
       this.cdr.detectChanges();
     },
-    error: () => {
-      this.erro = 'Não foi possível enviar. Tente novamente.';
-      this.enviando = false; // reabilita o botão no erro
-      this.cdr.detectChanges();
-    },
+    error: (err: HttpErrorResponse) => {
+  if (err.error?.erros) {
+    this.erro = err.error.erros.join(' ');
+  } else {
+    this.erro = 'Não foi possível enviar. Tente novamente.';
+  }
+
+  this.enviando = false;
+  this.cdr.detectChanges();
+},
   });
 }
 }
