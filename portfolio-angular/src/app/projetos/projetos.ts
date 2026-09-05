@@ -17,7 +17,7 @@ export class Projetos implements OnInit {
   erro = '';
 
   ngOnInit() {
-    this.service.listar().subscribe({
+    this.service.listarTodos().subscribe({
       next: (lista) => {
         this.projetos = lista;
         this.carregando = false;

@@ -30,7 +30,8 @@ export class Gestao implements OnInit {
     descricao: new FormControl(''),
     tecnologias: new FormControl(''),
     link_github: new FormControl(''),
-    ano: new FormControl(2026, [Validators.required])
+    ano: new FormControl(2026, [Validators.required, Validators.min(1900), Validators.max(2100)]),
+    status: new FormControl<'rascunho' | 'publicado'>('publicado', {nonNullable: true })
 });
 
 ngOnInit() {
@@ -39,7 +40,7 @@ ngOnInit() {
 
 carregar() {
   this.carregando = true;
-  this.service.listar().subscribe({
+  this.service.listarTodos().subscribe({
     next: (lista) => { this.projetos = lista; this.carregando = false; this.cdr.detectChanges(); },
     error: () => { this.erro = 'Nao foi possivel carregar os projetos.'; this.carregando = false; this.cdr.detectChanges(); }
   });
@@ -65,7 +66,7 @@ salvar() {
     : this.service.criar(dados);
 
     requisicao.subscribe({
-      next: () => {   this.salvando = false; this.editandoId = null; this.form.reset({ nome: '', descricao: '', tecnologias: '', link_github: '', ano: 2026 }); this.carregar(); },
+      next: () => {   this.salvando = false; this.editandoId = null; this.form.reset({ nome: '', descricao: '', tecnologias: '', link_github: '', ano: 2026, status: 'publicado' }); this.carregar(); },
       error: () => { this.salvando = false; this.erro = 'Nao foi possivel salvar.'; this.cdr.detectChanges(); }
     });
   }

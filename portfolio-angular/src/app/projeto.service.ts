@@ -10,6 +10,7 @@ export interface Projeto {
   tecnologias: string;
   link_github: string;
   ano: number;
+  status: 'rascunho' | 'publicado';
 }
 
 @Injectable({ providedIn: 'root' })
@@ -19,8 +20,11 @@ export class ProjetoService {
 
   listar(): Observable<Projeto[]> {
   return this.http.get<Projeto[]>(this.url);
-    
-    }
+}
+  
+  listarTodos(): Observable<Projeto[]> {
+  return this.http.get<Projeto[]>(`${this.url}?todos=1`);
+}
   
     // POST: o projeto vai inteiro no corpo. Sem id - quem gera o id e o banco.
 criar(projeto: Projeto): Observable<{ id: number; mensagem: string }> {

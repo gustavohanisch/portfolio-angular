@@ -1,5 +1,5 @@
 <!-- src/app/contato.html -->
-<h2>Fale comigo</h2>
+<h2>Fale comigo ✉️</h2>
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
   <label for="nome">Nome</label>
   <input id="nome" type="text" formControlName="nome">
@@ -26,5 +26,5 @@
 </form>
 
 <!-- estados de retorno -->
-@if (sucesso) { <p class="ok">{{ sucesso }}</p> }
-@if (erro)   { <p class="erro">{{ erro }}</p> }
+@if (sucesso) { <p class="ok">✓ {{ sucesso }}</p> }
+@if (erro)   { <p class="erro">⚠ {{ erro }}</p> }

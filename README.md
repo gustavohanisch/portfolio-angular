@@ -285,3 +285,38 @@ A lógica do formulário e da comunicação com a API permanece no arquivo TypeS
 
 Considero que o projeto atende ao **Nível A — Excelente**, pois o formulário possui validações, controle completo dos estados de envio, tratamento das mensagens retornadas pelo back-end e melhorias de acessibilidade e usabilidade. Além disso, as principais decisões da implementação estão documentadas nesta autoavaliação.
 
+
+## 🧪 Testes de erros da API
+
+Os testes foram realizados utilizando curl diretamente na API.
+
+400 — POST sem nome
+
+400 Bad Request
+{"erro":"Informe pelo menos o nome do projeto"}
+
+400 — PUT sem ID
+
+400 Bad Request
+{"erro":"PUT exige o id na URL: ?id=NN"}
+
+404 — DELETE com ID inexistente
+
+404 Not Found
+{"erro":"Projeto nao encontrado"}
+
+405 — método não permitido
+
+405 Method Not Allowed
+{"erro":"Metodo nao permitido"}
+
+Todos os testes retornaram os códigos HTTP e as mensagens JSON esperadas.
+
+## 💭 Antecipação — dois cliques rápidos em Adicionar projeto
+
+Se o botão de adicionar fosse clicado duas vezes rapidamente, poderiam ser enviadas duas requisições POST e, consequentemente, dois registros poderiam ser criados no banco. Para evitar isso pela interface, a variável salvando fica true durante a requisição e o botão é desabilitado enquanto o salvamento está em andamento.
+
+## 🔄 Comparação — atualizar a lista depois das operações
+
+Depois de salvar um projeto, a tela chama novamente o método carregar(), fazendo uma nova requisição à API e atualizando a lista com os dados atuais do banco. Já na exclusão, depois que a API confirma a operação, o projeto é removido diretamente do array local usando filter(), evitando uma nova requisição e a necessidade de recarregar a página.
+

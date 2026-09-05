@@ -31,10 +31,24 @@ $id = isset($_GET['id']) ? (int) $_GET['id'] : 0;
 
 if ($metodo === 'GET') {
 
-    $sql = "SELECT id, nome, descricao, tecnologias, link_github, ano
-            FROM projetos
-            WHERE status = 'publicado'
-            ORDER BY ano DESC, id";
+    $todos = isset($_GET['todos']) && $_GET['todos'] === '1';
+
+    if ($todos) {
+
+        // Gestão: mostra todos os projetos,
+        // incluindo rascunhos e publicados.
+        $sql = "SELECT id, nome, descricao, tecnologias, link_github, ano, status
+                FROM projetos
+                ORDER BY ano DESC, id";
+
+    } else {
+
+        // Portfólio público: mostra somente publicados.
+        $sql = "SELECT id, nome, descricao, tecnologias, link_github, ano, status
+                FROM projetos
+                WHERE status = 'publicado'
+                ORDER BY ano DESC, id";
+    }
 
     $projetos = $pdo->query($sql)->fetchAll();
 
@@ -71,7 +85,7 @@ if ($metodo === 'POST') {
         $dados['tecnologias'] ?? '',
         $dados['link_github'] ?? '',
         $dados['ano'] ?? date('Y'),
-        'publicado',
+        $dados['status'] ?? 'publicado',
     ]);
 
     http_response_code(201);
@@ -117,7 +131,8 @@ if ($metodo === 'PUT') {
                 descricao = ?,
                 tecnologias = ?,
                 link_github = ?,
-                ano = ?
+                ano = ?,
+                status = ?
             WHERE id = ?';
 
     $stmt = $pdo->prepare($sql);
@@ -128,12 +143,15 @@ if ($metodo === 'PUT') {
         $dados['tecnologias'] ?? '',
         $dados['link_github'] ?? '',
         $dados['ano'] ?? date('Y'),
+        $dados['status'] ?? 'publicado',
         $id,
     ]);
 
-    echo json_encode([
-        'mensagem' => 'Projeto atualizado'
-    ]);
+    http_response_code(200);
+
+echo json_encode([
+    'mensagem' => 'Projeto atualizado'
+]);
 
     exit;
 }
