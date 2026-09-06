@@ -42,7 +42,7 @@ carregar() {
   this.carregando = true;
   this.service.listarTodos().subscribe({
     next: (lista) => { this.projetos = lista; this.carregando = false; this.cdr.detectChanges(); },
-    error: () => { this.erro = 'Nao foi possivel carregar os projetos.'; this.carregando = false; this.cdr.detectChanges(); }
+    error: () => { this.erro = 'Não foi possível carregar os projetos.'; this.carregando = false; this.cdr.detectChanges(); }
   });
 }
 
@@ -67,19 +67,20 @@ salvar() {
 
     requisicao.subscribe({
       next: () => {   this.salvando = false; this.editandoId = null; this.form.reset({ nome: '', descricao: '', tecnologias: '', link_github: '', ano: 2026, status: 'publicado' }); this.carregar(); },
-      error: () => { this.salvando = false; this.erro = 'Nao foi possivel salvar.'; this.cdr.detectChanges(); }
+      error: () => { this.salvando = false; this.erro = 'Não foi possível salvar o projeto.'; this.cdr.detectChanges(); }
     });
   }
 
   excluir(p: Projeto) {
     if (!p.id) { return; }
-    if (!confirm(`Excluir o projeto "${p.nome}"? Esta acao nao pode ser desfeita.`)) { return; }
+    if (!confirm(`Excluir o projeto "${p.nome}"? Esta ação não pode ser desfeita.`)) { return; }
       
+    this.erro = '';
 
     this.service.excluir(p.id).subscribe({
       // A lista local perde o item na hora - sem recarregar a pagina.
       next: () => { this.projetos = this.projetos.filter(x => x.id !== p.id); },
-      error: () => { this.erro = 'Nao foi possivel excluir. Tente de novo.' }
+      error: () => { this.erro = 'Não foi possível excluir o projeto. Tente novamente.'; this.cdr.detectChanges(); }
     });
   }
 }

@@ -49,6 +49,10 @@
   <p class="erro-campo">⚠️ {{ erro }}</p>
 }
 
+@if (!carregando && projetos.length === 0 && !erro) {
+  <p>Nenhum projeto cadastrado ainda.</p>
+}
+
 @for (p of projetos; track p.id) {
   <div class="linha-projeto">
     <span>{{ p.nome }} ({{ p.ano }}) — Status: {{ p.status }}</span>
