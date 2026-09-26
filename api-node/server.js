@@ -15,7 +15,7 @@ const projetos = [
     nome: 'Portfolio Angular',
     descricao: 'Meu portfolio com Angular e Angular Material.',
     tecnologias: 'Angular, TypeScript',
-    link_github: 'https://github.com/seu-usuario/2026-DWII-portfolio-angular',
+    link_github: 'https://legendary-waffle-x564v4grx9vwhp47x-3000.app.github.dev/https://github.com/seu-usuario/2026-DWII-portfolio-angular',
     ano: 2026
   },
   {
