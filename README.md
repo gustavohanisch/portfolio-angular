@@ -513,4 +513,18 @@ Considero que o projeto atende ao **Nível A — Plena**, pois, além dos requis
 * **Content-Type:** `application/json; charset=utf-8`
 * **Explicação:** A criação retorna `201` porque um novo recurso foi criado com sucesso, enquanto a exclusão retorna `204` porque a operação foi concluída e não há conteúdo para retornar na resposta.
 
+## API em Node (Aula 21)
+
+Uma segunda versão da API, em JavaScript, na pasta `api-node/`.
+O contrato de `GET /api/projetos` é o mesmo do `api/projetos.php`
+
+Como rodar:
+
+    cd api-node
+    npm install
+    node server.js
+
+A API sobe em http://localhost:3000. Teste com:
+
+    curl -i http://localhost:3000/api/projetos
 
