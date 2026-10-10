@@ -32,12 +32,12 @@ criar(projeto: Projeto): Observable<{ id: number; mensagem: string }> {
 }
 
 // PUT: o id vai na URL (qual projeto) e o projeto vai no corpo (o que gravar)
-atualizar(id: number, projeto: Projeto): Observable<{ id: number; mensagem?: string }> {
-  return this.http.put<{ id: number; mensagem: string }>(`${this.url}?id=${id}`, projeto);
+atualizar(id: number, projeto: Projeto): Observable<{ id?: number; mensagem?: string }> {
+  return this.http.put<{ id: number; mensagem?: string }>(`${this.url}/${id}`, projeto);
 }
 
 excluir(id: number): Observable<void> {
-  return this.http.delete<void>(`${this.url}?id=${id}`);
+  return this.http.delete<void>(`${this.url}/${id}`);
 }
 // LACUNA 2 - escreva o metodo excluir(id: number): Observable<void>.
 // Mesma URL com ?id= do atualizar, sem corpo, e o verbo delete.
