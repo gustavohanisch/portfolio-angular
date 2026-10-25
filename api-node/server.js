@@ -57,10 +57,48 @@ app.post('/api/login', async (req, res) => {
       return res.status(401).json({ erro: 'Email ou senha invalidos' });
     }
 
-    const token = jwt.sign({ id: usuario.id, email: usuario.email }, SEGREDO, { expiresIn: '2h' });
+    const token = jwt.sign({ id: usuario.id, email: usuario.email }, SEGREDO, { expiresIn: '1h' });
     res.json({ token });
   } catch (erro) {
     res.status(500).json({ erro: 'Falha no servidor: ' + erro.message });
+  }
+});
+
+
+ // Lista pública: somente projetos publicados.
+app.get('/api/projetos', async (req, res) => {
+  try {
+    const sql = `
+      SELECT id, nome, descricao, tecnologias, link_github, ano, status
+      FROM projetos
+      WHERE status = 'publicado'
+      ORDER BY id DESC
+    `;
+
+    const [projetos] = await pool.execute(sql);
+    res.json(projetos);
+  } catch (erro) {
+    res.status(500).json({
+      erro: 'Falha no servidor: ' + erro.message
+    });
+  }
+});
+
+// Lista protegida: inclui publicados e rascunhos.
+app.get('/api/projetos/todos', autenticar, async (req, res) => {
+  try {
+    const sql = `
+      SELECT id, nome, descricao, tecnologias, link_github, ano, status
+      FROM projetos
+      ORDER BY id DESC
+    `;
+
+    const [projetos] = await pool.execute(sql);
+    res.json(projetos);
+  } catch (erro) {
+    res.status(500).json({
+      erro: 'Falha no servidor: ' + erro.message
+    });
   }
 });
 
@@ -156,7 +194,7 @@ app.put('/api/projetos/:id', autenticar, async (req, res) => {
 });
 
 // DELETE apaga: só precisa do id. Não há corpo no pedido, e a resposta também não tem.
-app.delete('/api/projetos/:id', async (req, res) => {
+app.delete('/api/projetos/:id', autenticar, async (req, res) => {
     try {
         const [resultado] = await pool.execute(
             'DELETE FROM projetos WHERE id = ?',
@@ -188,6 +226,114 @@ app.get('/api/tecnologias', async (req, res) => {
     res.status(500).json({ erro: 'Falha no servidor: ' + erro.message });
   }
 });
+
+
+/* POST /api/tecnologias
+   Cria uma tecnologia. Exige token JWT. */
+app.post('/api/tecnologias', autenticar, async (req, res) => {
+  try {
+    const dados = req.body;
+
+    if (!dados || !dados.nome || !dados.categoria) {
+      return res.status(400).json({
+        erro: 'Informe o nome e a categoria da tecnologia'
+      });
+    }
+
+    const sql = `
+      INSERT INTO tecnologias
+        (nome, categoria, descricao, ano_criacao, status)
+      VALUES (?, ?, ?, ?, ?)
+    `;
+
+    const [resultado] = await pool.execute(sql, [
+      dados.nome,
+      dados.categoria,
+      dados.descricao ?? '',
+      dados.ano_criacao ?? null,
+      dados.status === 'inativo' ? 'inativo' : 'ativo'
+    ]);
+
+    return res.status(201).json({
+      id: resultado.insertId,
+      mensagem: 'Tecnologia cadastrada'
+    });
+  } catch (erro) {
+    return res.status(500).json({
+      erro: 'Falha no servidor: ' + erro.message
+    });
+  }
+});
+
+
+/* PUT /api/tecnologias/:id
+   Atualiza uma tecnologia. Exige token JWT. */
+app.put('/api/tecnologias/:id', autenticar, async (req, res) => {
+  try {
+    const dados = req.body;
+
+    if (!dados || !dados.nome || !dados.categoria) {
+      return res.status(400).json({
+        erro: 'Informe o nome e a categoria da tecnologia'
+      });
+    }
+
+    const sql = `
+      UPDATE tecnologias
+      SET nome = ?, categoria = ?, descricao = ?,
+          ano_criacao = ?, status = ?
+      WHERE id = ?
+    `;
+
+    const [resultado] = await pool.execute(sql, [
+      dados.nome,
+      dados.categoria,
+      dados.descricao ?? '',
+      dados.ano_criacao ?? null,
+      dados.status === 'inativo' ? 'inativo' : 'ativo',
+      req.params.id
+    ]);
+
+    if (resultado.affectedRows === 0) {
+      return res.status(404).json({
+        erro: 'Tecnologia não encontrada'
+      });
+    }
+
+    return res.status(200).json({
+      mensagem: 'Tecnologia atualizada'
+    });
+  } catch (erro) {
+    return res.status(500).json({
+      erro: 'Falha no servidor: ' + erro.message
+    });
+  }
+});
+
+
+/* DELETE /api/tecnologias/:id
+   Exclui uma tecnologia. Exige token JWT. */
+app.delete('/api/tecnologias/:id', autenticar, async (req, res) => {
+  try {
+    const [resultado] = await pool.execute(
+      'DELETE FROM tecnologias WHERE id = ?',
+      [req.params.id]
+    );
+
+    if (resultado.affectedRows === 0) {
+      return res.status(404).json({
+        erro: 'Tecnologia não encontrada'
+      });
+    }
+
+    return res.status(204).end();
+  } catch (erro) {
+    return res.status(500).json({
+      erro: 'Falha no servidor: ' + erro.message
+    });
+  }
+});
+
 
 
 app.listen(PORTA, () => {
