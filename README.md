@@ -766,3 +766,15 @@ GET	    /api/tecnologias	            Não
 POST	   /api/tecnologias	            Sim
 PUT	   /api/tecnologias/:id	          Sim
 DELETE	/api/tecnologias/:id	        Sim
+
+
+
+### Aula 25: o Portfolio em React
+
+O front novo nasce em `portfolio-react/` (Vite + React), ao lado do Angular. Para rodar:
+
+cd portfolio-react
+npm install
+npm run dev
+
+A tela abre na porta 5173. Por enquanto os projetos são fixos no `src/App.jsx`; a Aula 27 os traz da API
