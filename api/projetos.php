@@ -1,5 +1,12 @@
 <?php
 
+// Antes de um POST/PUT/DELETE o navegador pergunta "posso?" com um OPTIONS.
+// Responda 204 (ok, sem corpo) e saia - isto é o "pre-voo" do CORS.
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    http_response_code(204);
+    exit;
+}
+
 // api/projetos.php - le, cria, altera e apaga projetos (CRUD completo)
 
 header('Content-Type: application/json; charset=utf-8');
